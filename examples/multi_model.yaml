@@ -7,15 +7,15 @@ dataset: PCF-Bench/PCF-Bench
 output_dir: results/sweep
 
 provider:
-  name: yunwu
+  name: openrouter
 
 model: PLACEHOLDER     # overridden per-iteration via --override-model
 
 api_keys_env:
-  - YUNWU_API_KEY_1
-  - YUNWU_API_KEY_2
-  - YUNWU_API_KEY_3
-  - YUNWU_API_KEY_4
+  - OPENROUTER_API_KEY_1
+  - OPENROUTER_API_KEY_2
+  - OPENROUTER_API_KEY_3
+  - OPENROUTER_API_KEY_4
 
 tasks: all
 max_samples: 200

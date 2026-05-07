@@ -264,7 +264,7 @@ def _cmd_info(_: argparse.Namespace) -> int:
     table = Table(title="pcfbench environment diagnostic", title_style="bold")
     table.add_column("provider", style="cyan")
     table.add_column("key env vars detected", justify="right")
-    for prov in ("yunwu", "siliconflow", "zhipuai", "openrouter", "openai"):
+    for prov in ("openrouter",):
         try:
             from tools.env_utils import get_api_keys
             keys = list(get_api_keys(prov) or [])
@@ -488,8 +488,9 @@ def build_parser() -> argparse.ArgumentParser:
                    help="Optional method-specific config name.")
     p.add_argument("--model", default="gpt-4o-mini",
                    help="VLM backbone (default: gpt-4o-mini).")
-    p.add_argument("--maslab_config", default="yunwu_config.json",
-                   help="Filename in MAS/model_api_configs/.")
+    p.add_argument("--maslab_config", default="openrouter_config.json",
+                   help="Filename in MAS/model_api_configs/ (copy from the "
+                        "*.example.json template and fill in your key).")
     p.add_argument("--data_dir", required=True,
                    help="Materialized PCF samples directory "
                         "(typically the cache_dir from 'pcfbench fetch' or "

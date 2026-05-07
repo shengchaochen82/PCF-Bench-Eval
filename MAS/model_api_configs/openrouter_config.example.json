@@ -1,0 +1,312 @@
+{
+  "openai/gpt-4o-mini": {
+    "model_list": [
+      {
+        "model_name": "openai/gpt-4o-mini",
+        "model_url": "https://openrouter.ai/api/v1",
+        "api_key": "YOUR_OPENROUTER_API_KEY_HERE"
+      }
+    ],
+    "max_workers_per_model": 2
+  },
+  "openai/gpt-4o": {
+    "model_list": [
+      {
+        "model_name": "openai/gpt-4o",
+        "model_url": "https://openrouter.ai/api/v1",
+        "api_key": "YOUR_OPENROUTER_API_KEY_HERE"
+      }
+    ],
+    "max_workers_per_model": 2
+  },
+  "anthropic/claude-3-5-sonnet-20241022": {
+    "model_list": [
+      {
+        "model_name": "anthropic/claude-3-5-sonnet-20241022",
+        "model_url": "https://openrouter.ai/api/v1",
+        "api_key": "YOUR_OPENROUTER_API_KEY_HERE"
+      }
+    ],
+    "max_workers_per_model": 2
+  },
+  "google/gemini-2.0-flash": {
+    "model_list": [
+      {
+        "model_name": "google/gemini-2.0-flash",
+        "model_url": "https://openrouter.ai/api/v1",
+        "api_key": "YOUR_OPENROUTER_API_KEY_HERE"
+      }
+    ],
+    "max_workers_per_model": 2
+  },
+  "qwen/qwen-vl-max": {
+    "model_list": [
+      {
+        "model_name": "qwen/qwen-vl-max",
+        "model_url": "https://openrouter.ai/api/v1",
+        "api_key": "YOUR_OPENROUTER_API_KEY_HERE"
+      }
+    ],
+    "max_workers_per_model": 1
+  },
+  "qwen/qwen2.5-vl-72b-instruct": {
+    "model_list": [
+      {
+        "model_name": "qwen/qwen2.5-vl-72b-instruct",
+        "model_url": "https://openrouter.ai/api/v1",
+        "api_key": "YOUR_OPENROUTER_API_KEY_HERE"
+      }
+    ],
+    "max_workers_per_model": 1
+  },
+  "qwen/qwen2.5-vl-7b-instruct": {
+    "model_list": [
+      {
+        "model_name": "qwen/qwen2.5-vl-7b-instruct",
+        "model_url": "https://openrouter.ai/api/v1",
+        "api_key": "YOUR_OPENROUTER_API_KEY_HERE"
+      }
+    ],
+    "max_workers_per_model": 1
+  },
+  "qwen/qwen2.5-vl-32b-instruct": {
+    "model_list": [
+      {
+        "model_name": "qwen/qwen2.5-vl-32b-instruct",
+        "model_url": "https://openrouter.ai/api/v1",
+        "api_key": "YOUR_OPENROUTER_API_KEY_HERE"
+      }
+    ],
+    "max_workers_per_model": 1
+  },
+  "qwen/qwen2-vl-72b-instruct": {
+    "model_list": [
+      {
+        "model_name": "qwen/qwen2-vl-72b-instruct",
+        "model_url": "https://openrouter.ai/api/v1",
+        "api_key": "YOUR_OPENROUTER_API_KEY_HERE"
+      }
+    ],
+    "max_workers_per_model": 1
+  },
+  "qwen/qwen3-vl-8b-instruct": {
+    "model_list": [
+      {
+        "model_name": "qwen/qwen3-vl-8b-instruct",
+        "model_url": "https://openrouter.ai/api/v1",
+        "api_key": "YOUR_OPENROUTER_API_KEY_HERE"
+      }
+    ],
+    "max_workers_per_model": 1
+  },
+  "mistralai/mistral-large-latest": {
+    "model_list": [
+      {
+        "model_name": "mistralai/mistral-large-latest",
+        "model_url": "https://openrouter.ai/api/v1",
+        "api_key": "YOUR_OPENROUTER_API_KEY_HERE"
+      }
+    ],
+    "max_workers_per_model": 1
+  },
+  "openai/gpt-4.1": {
+    "model_list": [
+      {
+        "model_name": "openai/gpt-4.1",
+        "model_url": "https://openrouter.ai/api/v1",
+        "api_key": "YOUR_OPENROUTER_API_KEY_HERE"
+      }
+    ],
+    "max_workers_per_model": 1
+  },
+  "openai/gpt-4.1-mini": {
+    "model_list": [
+      {
+        "model_name": "openai/gpt-4.1-mini",
+        "model_url": "https://openrouter.ai/api/v1",
+        "api_key": "YOUR_OPENROUTER_API_KEY_HERE"
+      }
+    ],
+    "max_workers_per_model": 1
+  },
+  "openai/gpt-5": {
+    "model_list": [
+      {
+        "model_name": "openai/gpt-5",
+        "model_url": "https://openrouter.ai/api/v1",
+        "api_key": "YOUR_OPENROUTER_API_KEY_HERE"
+      }
+    ],
+    "max_workers_per_model": 1
+  },
+  "openai/gpt-5-mini": {
+    "model_list": [
+      {
+        "model_name": "openai/gpt-5-mini",
+        "model_url": "https://openrouter.ai/api/v1",
+        "api_key": "YOUR_OPENROUTER_API_KEY_HERE"
+      }
+    ],
+    "max_workers_per_model": 1
+  },
+  "openai/o3": {
+    "model_list": [
+      {
+        "model_name": "openai/o3",
+        "model_url": "https://openrouter.ai/api/v1",
+        "api_key": "YOUR_OPENROUTER_API_KEY_HERE"
+      }
+    ],
+    "max_workers_per_model": 1
+  },
+  "openai/o4-mini": {
+    "model_list": [
+      {
+        "model_name": "openai/o4-mini",
+        "model_url": "https://openrouter.ai/api/v1",
+        "api_key": "YOUR_OPENROUTER_API_KEY_HERE"
+      }
+    ],
+    "max_workers_per_model": 1
+  },
+  "x-ai/grok-4": {
+    "model_list": [
+      {
+        "model_name": "x-ai/grok-4",
+        "model_url": "https://openrouter.ai/api/v1",
+        "api_key": "YOUR_OPENROUTER_API_KEY_HERE"
+      }
+    ],
+    "max_workers_per_model": 1
+  },
+  "x-ai/grok-4.1": {
+    "model_list": [
+      {
+        "model_name": "x-ai/grok-4.1",
+        "model_url": "https://openrouter.ai/api/v1",
+        "api_key": "YOUR_OPENROUTER_API_KEY_HERE"
+      }
+    ],
+    "max_workers_per_model": 1
+  },
+  "z-ai/glm-4.6v": {
+    "model_list": [
+      {
+        "model_name": "z-ai/glm-4.6v",
+        "model_url": "https://openrouter.ai/api/v1",
+        "api_key": "YOUR_OPENROUTER_API_KEY_HERE"
+      }
+    ],
+    "max_workers_per_model": 1
+  },
+  "google/gemini-3-flash": {
+    "model_list": [
+      {
+        "model_name": "google/gemini-3-flash",
+        "model_url": "https://openrouter.ai/api/v1",
+        "api_key": "YOUR_OPENROUTER_API_KEY_HERE"
+      }
+    ],
+    "max_workers_per_model": 1
+  },
+  "anthropic/claude-sonnet-4-5-20250929": {
+    "model_list": [
+      {
+        "model_name": "anthropic/claude-sonnet-4-5-20250929",
+        "model_url": "https://openrouter.ai/api/v1",
+        "api_key": "YOUR_OPENROUTER_API_KEY_HERE"
+      }
+    ],
+    "max_workers_per_model": 1
+  },
+  "anthropic/claude-opus-4-5-20251101": {
+    "model_list": [
+      {
+        "model_name": "anthropic/claude-opus-4-5-20251101",
+        "model_url": "https://openrouter.ai/api/v1",
+        "api_key": "YOUR_OPENROUTER_API_KEY_HERE"
+      }
+    ],
+    "max_workers_per_model": 1
+  },
+  "anthropic/claude-sonnet-4-5-20250929-thinking": {
+    "model_list": [
+      {
+        "model_name": "anthropic/claude-sonnet-4-5-20250929-thinking",
+        "model_url": "https://openrouter.ai/api/v1",
+        "api_key": "YOUR_OPENROUTER_API_KEY_HERE"
+      }
+    ],
+    "max_workers_per_model": 1
+  },
+  "anthropic/claude-opus-4-5-20251101-thinking": {
+    "model_list": [
+      {
+        "model_name": "anthropic/claude-opus-4-5-20251101-thinking",
+        "model_url": "https://openrouter.ai/api/v1",
+        "api_key": "YOUR_OPENROUTER_API_KEY_HERE"
+      }
+    ],
+    "max_workers_per_model": 1
+  },
+  "meta-llama/llama-4-maverick": {
+    "model_list": [
+      {
+        "model_name": "meta-llama/llama-4-maverick",
+        "model_url": "https://openrouter.ai/api/v1",
+        "api_key": "YOUR_OPENROUTER_API_KEY_HERE"
+      }
+    ],
+    "max_workers_per_model": 1
+  },
+  "meta-llama/llama-4-scout": {
+    "model_list": [
+      {
+        "model_name": "meta-llama/llama-4-scout",
+        "model_url": "https://openrouter.ai/api/v1",
+        "api_key": "YOUR_OPENROUTER_API_KEY_HERE"
+      }
+    ],
+    "max_workers_per_model": 1
+  },
+  "meta-llama/llama-3.2-11b-vision-instruct": {
+    "model_list": [
+      {
+        "model_name": "meta-llama/llama-3.2-11b-vision-instruct",
+        "model_url": "https://openrouter.ai/api/v1",
+        "api_key": "YOUR_OPENROUTER_API_KEY_HERE"
+      }
+    ],
+    "max_workers_per_model": 1
+  },
+  "meta-llama/llama-3.2-90b-vision-instruct": {
+    "model_list": [
+      {
+        "model_name": "meta-llama/llama-3.2-90b-vision-instruct",
+        "model_url": "https://openrouter.ai/api/v1",
+        "api_key": "YOUR_OPENROUTER_API_KEY_HERE"
+      }
+    ],
+    "max_workers_per_model": 1
+  },
+  "x-ai/grok-4-fast-non-reasoning": {
+    "model_list": [
+      {
+        "model_name": "x-ai/grok-4-fast-non-reasoning",
+        "model_url": "https://openrouter.ai/api/v1",
+        "api_key": "YOUR_OPENROUTER_API_KEY_HERE"
+      }
+    ],
+    "max_workers_per_model": 1
+  },
+  "google/gemini-3.1-flash-lite-preview": {
+    "model_list": [
+      {
+        "model_name": "google/gemini-3.1-flash-lite-preview",
+        "model_url": "https://openrouter.ai/api/v1",
+        "api_key": "YOUR_OPENROUTER_API_KEY_HERE"
+      }
+    ],
+    "max_workers_per_model": 1
+  }
+}

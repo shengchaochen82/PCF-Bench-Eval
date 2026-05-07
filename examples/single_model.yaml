@@ -11,16 +11,17 @@ dataset: PCF-Bench/PCF-Bench
 output_dir: results
 
 provider:
-  name: yunwu
+  name: openrouter
   timeout_s: 120
   max_retries: 3
 
-model: gpt-4o-mini
+# Any OpenRouter-routed model id; see https://openrouter.ai/models.
+model: openai/gpt-4o-mini
 
 # Use one or more env-var names holding API keys (auto round-robin).
 api_keys_env:
-  - YUNWU_API_KEY_1
-  - YUNWU_API_KEY_2
+  - OPENROUTER_API_KEY_1
+  - OPENROUTER_API_KEY_2
 
 tasks: all          # or e.g. [family_classification, loss_prediction_1550]
 max_samples: 200    # ignored if subset_manifest is set

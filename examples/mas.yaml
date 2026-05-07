@@ -8,7 +8,7 @@
 # use the dedicated subcommand instead, which takes CLI flags rather than
 # this YAML schema:
 #
-#   pcfbench mas-eval --method dylan --model gpt-4o-mini \
+#   pcfbench mas-eval --method dylan --model openai/gpt-4o-mini \
 #       --data_dir results/.cache/<dataset-slug> --max_samples 100
 #
 run_name: mas_native_pipeline
@@ -16,12 +16,12 @@ dataset: PCF-Bench/PCF-Bench
 output_dir: results/mas
 
 provider:
-  name: yunwu
+  name: openrouter
 
-model: gpt-4o-mini
+model: openai/gpt-4o-mini
 
 api_keys_env:
-  - YUNWU_API_KEY_1
+  - OPENROUTER_API_KEY_1
 
 tasks:
   - mas_pipeline_cascaded

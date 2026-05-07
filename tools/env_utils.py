@@ -7,11 +7,11 @@ Usage:
     from tools.env_utils import get_api_key, get_api_keys, get_config
 
     # Single key
-    api_key = get_api_key("SILICONFLOW_API_KEY")
+    api_key = get_api_key("OPENROUTER_API_KEY")
 
     # Multi-key pool
-    api_keys = get_api_keys("SILICONFLOW")
-    
+    api_keys = get_api_keys("OPENROUTER")
+
     # Config value with default
     workers = get_config("DEFAULT_NUM_WORKERS", default=4, as_int=True)
 """
@@ -119,11 +119,11 @@ def get_api_key(provider: str, key_name: Optional[str] = None) -> Optional[str]:
     
     Looks for keys in this order:
     1. Explicit key_name argument
-    2. {PROVIDER}_API_KEY (e.g., SILICONFLOW_API_KEY)
+    2. {PROVIDER}_API_KEY (e.g., OPENROUTER_API_KEY)
     3. {PROVIDER}_API_KEY_1 (first numbered key as fallback)
     
     Args:
-        provider: Provider name (siliconflow, openrouter, zhipuai, openai)
+        provider: Provider name (only ``openrouter`` is supported in the public release).
         key_name: Explicit key name to look for
     
     Returns:
@@ -308,7 +308,7 @@ def print_env_status() -> None:
     console.print("\n[bold]Environment Configuration[/bold]")
     console.print("=" * 50)
     
-    providers = ["yunwu", "siliconflow", "zhipuai", "openrouter", "openai"]
+    providers = ["openrouter"]
     
     for provider in providers:
         keys = get_api_keys(provider)

@@ -3,11 +3,8 @@
 .env.*
 *.env
 !.env.example
-# MASLab provider configs with real API keys; users copy *.example.json and fill in
-MAS/model_api_configs/yunwu_config.json
+# MASLab provider config with real API key; users copy openrouter_config.example.json
 MAS/model_api_configs/openrouter_config.json
-MAS/model_api_configs/zhipuai_config.json
-MAS/model_api_configs/siliconflow_config.json
 
 # ── Python ─────────────────────────────────────────────────────────────────
 __pycache__/

@@ -31,7 +31,7 @@ A configuration-driven evaluation harness for **28 vision-language reasoning tas
 | | |
 | --- | --- |
 | 🧩 **28 tasks, 6 categories** | Geometry · Physics · Text · Multimodal · Inverse Design · Code Generation, plus a 4-stage MAS pipeline |
-| 🔌 **4 providers, 40-key pool** | yunwu · siliconflow · zhipuai · openrouter — round-robin across an arbitrary number of API keys |
+| 🔌 **OpenRouter, multi-key pool** | One provider routes to 200+ frontier and open-weight VLMs; round-robin across an arbitrary number of OpenRouter keys |
 | 🤖 **12 MAS baselines** | DyLAN · MacNet · AutoGen · EvoMAC · MAV · AgentVerse · CAMEL · Self-Consistency · CoT · LLM-Debate · MAD · Vanilla |
 | 🎛 **One config, one CLI** | Single pydantic-validated YAML drives every run; eight subcommands cover the full life-cycle |
 | 📊 **Standard outputs** | Each run emits `<id>.json`, `<id>.csv` (leaderboard-ready), and `<id>.md` (human summary) |
@@ -64,8 +64,8 @@ git clone https://github.com/<org>/PCFBench_Eval && cd PCFBench_Eval
 pip install -e .
 
 # 2. set provider keys (any number; supports round-robin)
-export YUNWU_API_KEY_1=sk-...
-export YUNWU_API_KEY_2=sk-...
+export OPENROUTER_API_KEY_1=sk-or-...
+export OPENROUTER_API_KEY_2=sk-or-...
 
 # 3. scaffold a config (the dataset is materialized automatically on first eval)
 pcfbench init my_run --dataset <org>/PCF-Bench
@@ -257,15 +257,15 @@ dataset: PCF-Bench/PCF-Bench
 output_dir: results
 
 provider:
-  name: yunwu                # yunwu / siliconflow / zhipuai / openrouter / openai
+  name: openrouter           # the only supported provider in the public release
   timeout_s: 120
   max_retries: 3
 
-model: gpt-4o-mini
+model: openai/gpt-4o-mini    # any OpenRouter model id
 
 api_keys_env:                # round-robin pool; up to 100 keys
-  - YUNWU_API_KEY_1
-  - YUNWU_API_KEY_2
+  - OPENROUTER_API_KEY_1
+  - OPENROUTER_API_KEY_2
 
 tasks: all                   # or a list, e.g. [family_classification, loss_prediction_1550]
 max_samples: 200
@@ -292,18 +292,15 @@ Three ready-to-use templates ship in `examples/`:
 
 ---
 
-## 🔌 Supported providers
+## 🔌 Supported provider
 
-`tools/llm_client.py` ships clients for four OpenAI-compatible aggregators. Each pulls keys from environment variables matching `<PROVIDER>_API_KEY_*`; supply as many as you have, the round-robin pool will use them all.
+The public release routes every model through **OpenRouter** so that the same 41-VLM cohort can be evaluated under one OpenAI-compatible API without per-vendor SDK plumbing. Supply one or more `OPENROUTER_API_KEY_*` environment variables and the round-robin pool will use them all.
 
 | Provider | env-var pattern | base URL |
 | --- | --- | --- |
-| `yunwu` | `YUNWU_API_KEY_*` | `https://yunwu.ai/v1` |
-| `siliconflow` | `SILICONFLOW_API_KEY_*` | `https://api.siliconflow.cn/v1` |
-| `zhipuai` | `ZHIPUAI_API_KEY_*` | `https://open.bigmodel.cn/api/paas/v4` |
 | `openrouter` | `OPENROUTER_API_KEY_*` | `https://openrouter.ai/api/v1` |
 
-Adding a provider is one subclass of `BaseLLMClient`; see existing implementations for the contract (`chat()` and `vision_chat()` methods).
+Set `model:` in your config to any OpenRouter id (`openai/gpt-4o-mini`, `anthropic/claude-sonnet-4-5`, `google/gemini-2.0-flash`, `qwen/qwen-vl-max`, ...). The client implementation is `OpenRouterClient` in `tools/llm_client.py`; subclass `BaseLLMClient` if you need a private endpoint.
 
 ---
 
@@ -385,7 +382,7 @@ PCFBench_Eval/
 <details>
 <summary><b>How long does a full run take?</b></summary>
 
-A 200-sample-per-task pass over all 28 tasks against `gpt-4o-mini` with 16 workers and a single API key takes ≈ 2 hours. Throughput scales near-linearly with key count up to provider RPM ceilings; with a 40-key yunwu pool we routinely sustain 200+ requests in flight.
+A 200-sample-per-task pass over all 28 tasks against `openai/gpt-4o-mini` with 16 workers and a single API key takes ≈ 2 hours. Throughput scales near-linearly with key count up to OpenRouter's per-account RPM ceiling; with a multi-key pool we routinely sustain 200+ requests in flight.
 </details>
 
 <details>

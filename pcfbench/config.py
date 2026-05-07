@@ -9,7 +9,8 @@ Example YAML::
     run_name: gpt-4o-mini-baseline
     dataset: PCF-Bench/PCF-Bench
     output_dir: results/
-    provider: yunwu
+    provider:
+      name: openrouter
     model: gpt-4o-mini
     tasks: [family_classification, loss_prediction_1550]
     max_samples: 200
@@ -27,14 +28,14 @@ import yaml
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 
-PROVIDERS = ("yunwu", "siliconflow", "zhipuai", "openrouter", "openai")
+PROVIDERS = ("openrouter",)
 
 
 class ProviderConfig(BaseModel):
     """LLM provider settings."""
     model_config = ConfigDict(extra="forbid")
 
-    name: Literal[PROVIDERS] = "yunwu"
+    name: Literal[PROVIDERS] = "openrouter"
     base_url: Optional[str] = Field(
         default=None,
         description="Override the provider default (only set for self-hosted endpoints).",

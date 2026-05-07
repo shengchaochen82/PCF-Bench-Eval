@@ -74,8 +74,8 @@ class ProviderClient:
                     out.append(v)
             if out:
                 return out
-        # Fallback to provider-default lookup (env_utils.get_api_keys handles
-        # SILICONFLOW_API_KEY_*, YUNWU_API_KEY_* etc.).
+        # Fallback to provider-default lookup (env_utils.get_api_keys reads
+        # OPENROUTER_API_KEY_* / OPENROUTER_API_KEYS).
         from tools.env_utils import get_api_keys
         return list(get_api_keys(config.provider.name) or [])
 

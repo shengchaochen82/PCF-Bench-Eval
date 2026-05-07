@@ -14,7 +14,7 @@ Usage:
 
     # MASLab method (e.g., DyLAN applied to PCFBench pipeline)
     python eval/run_mas_benchmark.py --mode maslab --method pcfbench_pipeline \\
-        --model gpt-4o-mini --maslab_config yunwu_config.json
+        --model openai/gpt-4o-mini --maslab_config openrouter_config.json
 
     # Compare multiple methods
     python eval/run_mas_benchmark.py --mode compare \\
@@ -268,9 +268,10 @@ def main():
                              "mad, self_consistency, pcfbench_pipeline, ...).")
     parser.add_argument("--method_config", default=None,
                         help="Method config name (default: method-specific).")
-    parser.add_argument("--model", default="gpt-4o-mini")
-    parser.add_argument("--maslab_config", default="yunwu_config.json",
-                        help="Filename in MAS/model_api_configs/.")
+    parser.add_argument("--model", default="openai/gpt-4o-mini")
+    parser.add_argument("--maslab_config", default="openrouter_config.json",
+                        help="Filename in MAS/model_api_configs/ "
+                             "(copy from the *.example.json template).")
     parser.add_argument("--data_dir", required=True,
                         help="Path to materialized PCF samples (e.g. the "
                              "cache_dir produced by 'pcfbench fetch').")
