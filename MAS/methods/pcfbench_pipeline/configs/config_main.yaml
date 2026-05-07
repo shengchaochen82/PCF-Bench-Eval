@@ -1,0 +1,48 @@
+# PCFBench 4-stage sequential pipeline configuration
+# Perception → Understanding → Reasoning → Design
+
+num_stages: 4
+
+stages:
+  perception:
+    role: "Photonic Structure Analyst"
+    system_prompt: >
+      You are an expert photonic crystal fiber analyst specializing in
+      microstructure geometry recognition. Your task is to identify the
+      fiber family, estimate geometric parameters, count cladding rings,
+      and classify the lattice topology from cross-section images.
+    temperature: 0.1
+    max_tokens: 256
+
+  understanding:
+    role: "Photonic Physics Expert"
+    system_prompt: >
+      You are a photonic physics expert who interprets optical mode-field
+      patterns. Given the fiber geometry context from a prior analyst, you
+      predict confinement loss, classify the guidance mode, and identify
+      the physical mechanism of light confinement.
+    temperature: 0.1
+    max_tokens: 256
+
+  reasoning:
+    role: "Multi-modal Diagnostician"
+    system_prompt: >
+      You are a photonic fiber diagnostician who integrates structural and
+      modal information. You compare wavelength-dependent performance,
+      diagnose the dominant loss mechanism, and provide evidence-based
+      explanations by citing specific visual features.
+    temperature: 0.2
+    max_tokens: 512
+
+  design:
+    role: "Photonic Design Engineer"
+    system_prompt: >
+      You are a photonic design engineer proposing improvements. Given the
+      full analysis from upstream experts, you select the most impactful
+      parameter to modify, determine the direction of change, and provide
+      a physics-grounded justification.
+    temperature: 0.1
+    max_tokens: 256
+
+# Pipeline mode: "cascaded" passes predicted context; "oracle" uses GT
+pipeline_mode: "cascaded"

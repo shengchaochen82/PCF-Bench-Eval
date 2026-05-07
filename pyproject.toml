@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pcfbench"
+version = "0.1.0"
+description = "Evaluation harness for PCF-Bench (Photonic Crystal Fiber Inverse Design)."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "PCF-Bench authors" }]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Scientific/Engineering :: Physics",
+]
+
+dependencies = [
+    "openai>=1.40",
+    "pydantic>=2.5",
+    "pyyaml>=6.0",
+    "tqdm>=4.66",
+    "rich>=13.0",
+    "python-dotenv>=1.0",
+    "numpy>=1.24",
+    "requests>=2.31",
+    "datasets>=3.0",
+    "Pillow>=10.0",
+]
+
+[project.optional-dependencies]
+mas = [
+    "scipy",
+    "Pillow",
+]
+
+[project.scripts]
+pcfbench = "pcfbench.cli:main"
+
+[tool.setuptools]
+packages = ["pcfbench"]
+
+[tool.setuptools.package-data]
+pcfbench = ["*.yaml", "*.json"]

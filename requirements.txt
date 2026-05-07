@@ -1,0 +1,8 @@
+openai>=1.40
+pydantic>=2.5
+pyyaml>=6.0
+tqdm>=4.66
+rich>=13.0
+python-dotenv>=1.0
+numpy>=1.24
+requests>=2.31

@@ -1,0 +1,34 @@
+# Native multi-agent sequential pipeline (Perception → Understanding →
+# Reasoning → Design). Run with the standard `pcfbench eval`:
+#
+#   pcfbench eval --config examples/mas.yaml
+#
+# For the 12 MASLab baselines (DyLAN / MacNet / AutoGen / EvoMAC / MAV /
+# AgentVerse / CAMEL / Self-Consistency / CoT / LLM-Debate / MAD / Vanilla)
+# use the dedicated subcommand instead, which takes CLI flags rather than
+# this YAML schema:
+#
+#   pcfbench mas-eval --method dylan --model gpt-4o-mini \
+#       --data_dir results/.cache/<dataset-slug> --max_samples 100
+#
+run_name: mas_native_pipeline
+dataset: PCF-Bench/PCF-Bench
+output_dir: results/mas
+
+provider:
+  name: yunwu
+
+model: gpt-4o-mini
+
+api_keys_env:
+  - YUNWU_API_KEY_1
+
+tasks:
+  - mas_pipeline_cascaded
+  - mas_pipeline_oracle
+
+max_samples: 100
+
+runner:
+  num_workers: 8
+  rpm_limit: 240

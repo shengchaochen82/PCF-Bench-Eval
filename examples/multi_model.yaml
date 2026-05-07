@@ -1,0 +1,27 @@
+# Sweep multiple models with the same data + tasks.
+# Run with a small wrapper script: for m in $(yq '.sweep.models[]' ...); do
+#   pcfbench eval --config examples/multi_model.yaml --override-model "$m"
+# done
+run_name: model_sweep_2026Q2
+dataset: PCF-Bench/PCF-Bench
+output_dir: results/sweep
+
+provider:
+  name: yunwu
+
+model: PLACEHOLDER     # overridden per-iteration via --override-model
+
+api_keys_env:
+  - YUNWU_API_KEY_1
+  - YUNWU_API_KEY_2
+  - YUNWU_API_KEY_3
+  - YUNWU_API_KEY_4
+
+tasks: all
+max_samples: 200
+
+runner:
+  num_workers: 32
+  rpm_limit: 1200
+  temperature: 0.1
+  max_tokens: 2048

@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+"""Standalone launcher for the pcfbench CLI.
+
+Lets you run ``./bin/pcfbench eval ...`` straight from a fresh checkout
+without ``pip install -e .``.  Resolves the package from the repository
+root and dispatches into :func:`pcfbench.cli.main`.
+"""
+from __future__ import annotations
+
+import os
+import sys
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+for d in (REPO_ROOT, REPO_ROOT / "eval"):
+    if str(d) not in sys.path:
+        sys.path.insert(0, str(d))
+
+if __name__ == "__main__":
+    from pcfbench.cli import main
+    sys.exit(main())
