@@ -10,8 +10,6 @@
 [![Tasks](https://img.shields.io/badge/tasks-28-orange.svg)](#-task-catalogue)
 [![Models](https://img.shields.io/badge/providers-4-lightgrey.svg)](#-supported-providers)
 
-A configuration-driven evaluation harness for **28 vision-language reasoning tasks** spanning geometry perception, physics understanding, multimodal reasoning, inverse design, and code generation, on a domain-specific benchmark**.
-
 [**Quickstart**](#-quickstart) ·
 [**Tasks**](#-task-catalogue) ·
 [**CLI**](#-cli-reference) ·
