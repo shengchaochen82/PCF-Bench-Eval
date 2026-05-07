@@ -46,13 +46,12 @@ A configuration-driven evaluation harness for **28 vision-language reasoning tas
 3. [Task catalogue](#-task-catalogue)
 4. [CLI reference](#-cli-reference)
 5. [Configuration](#-configuration)
-6. [Supported providers](#-supported-providers)
+6. [Supported provider](#-supported-provider)
 7. [Multi-agent (MAS) evaluation](#-multi-agent-mas-evaluation)
 8. [Evaluate your own model](#-evaluate-your-own-model)
 9. [Repository layout](#-repository-layout)
 10. [FAQ](#-faq)
-11. [Citation](#-citation)
-12. [License](#license)
+11. [License](#license)
 
 ---
 
@@ -412,21 +411,6 @@ pcfbench compare results/baseline.json results/improved.json
 
 Prints a per-task, per-metric Δ-table with green/red arrows.
 </details>
-
----
-
-## 📖 Citation
-
-```bibtex
-@inproceedings{pcfbench2026,
-  title     = {PCFBench: How Far Can Vision-Language Models Go in Photonic Inverse Design?},
-  author    = {<authors>},
-  booktitle = {Advances in Neural Information Processing Systems (NeurIPS) — Datasets and Benchmarks Track},
-  year      = {2026}
-}
-```
-
-If you build on the MAS bridging layer, please also cite the upstream **MASLab** project and the original baseline papers (DyLAN, MacNet, AutoGen, EvoMAC, MAV, AgentVerse, CAMEL, Self-Consistency, CoT, LLM-Debate, MAD).
 
 ---
 
