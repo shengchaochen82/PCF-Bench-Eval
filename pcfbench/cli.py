@@ -10,7 +10,6 @@ Subcommands::
     score      Re-render a previously written run.json into CSV + Markdown.
     compare    Diff two run.json files and print a leaderboard delta.
     info       Print environment diagnostics (provider keys, workers, ...).
-    version    Print pcfbench version.
 
 Run ``pcfbench <subcommand> --help`` for per-command flags.
 """
@@ -28,20 +27,12 @@ from rich.panel import Panel
 from rich.table import Table
 from rich.text import Text
 
-from pcfbench import __version__
 from pcfbench.config import EvalConfig, load_config
 
 
 CONSOLE = Console()
 REPO_ROOT = Path(__file__).resolve().parent.parent
 TEMPLATES = REPO_ROOT / "examples"
-
-
-# ── version ───────────────────────────────────────────────────────────────
-
-def _cmd_version(_: argparse.Namespace) -> int:
-    CONSOLE.print(f"[bold cyan]pcfbench[/bold cyan] [dim]v[/dim]{__version__}")
-    return 0
 
 
 # ── tasks ─────────────────────────────────────────────────────────────────
@@ -280,17 +271,12 @@ def _cmd_info(_: argparse.Namespace) -> int:
     other.add_row("repo root", str(REPO_ROOT))
     other.add_row("templates dir",
                   str(TEMPLATES) if TEMPLATES.is_dir() else "(missing)")
-    other.add_row("python", sys.version.split()[0])
-    try:
-        import openai
-        other.add_row("openai", openai.__version__)
-    except ImportError:
-        other.add_row("openai", "[red]not installed[/red]")
-    try:
-        import pydantic
-        other.add_row("pydantic", pydantic.__version__)
-    except ImportError:
-        other.add_row("pydantic", "[red]not installed[/red]")
+    for pkg in ("openai", "pydantic"):
+        try:
+            __import__(pkg)
+            other.add_row(pkg, "[green]installed[/green]")
+        except ImportError:
+            other.add_row(pkg, "[red]not installed[/red]")
     CONSOLE.print(other)
     return 0
 
@@ -403,9 +389,6 @@ def build_parser() -> argparse.ArgumentParser:
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     sub = parser.add_subparsers(dest="cmd", required=True, metavar="<command>")
-
-    p = sub.add_parser("version", help="Print pcfbench version.")
-    p.set_defaults(fn=_cmd_version)
 
     p = sub.add_parser(
         "fetch",

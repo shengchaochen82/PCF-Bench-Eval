@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pcfbench"
-version = "0.1.0"
+version = "0.0.0"
 description = "Evaluation harness for PCF-Bench (Photonic Crystal Fiber Inverse Design)."
 readme = "README.md"
 requires-python = ">=3.10"

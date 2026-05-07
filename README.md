@@ -58,8 +58,8 @@ A configuration-driven evaluation harness for **28 vision-language reasoning tas
 ## 🚀 Quickstart
 
 ```bash
-# 1. install
-git clone https://github.com/<org>/PCFBench_Eval && cd PCFBench_Eval
+# 1. install (replace <repo-url> with the URL displayed at the top of the page)
+git clone <repo-url> PCF-Bench-Eval && cd PCF-Bench-Eval
 pip install -e .
 
 # 2. set provider keys (any number; supports round-robin)
@@ -67,7 +67,7 @@ export OPENROUTER_API_KEY_1=sk-or-...
 export OPENROUTER_API_KEY_2=sk-or-...
 
 # 3. scaffold a config (the dataset is materialized automatically on first eval)
-pcfbench init my_run --dataset <org>/PCF-Bench
+pcfbench init my_run --dataset PCF-Bench/PCF-Bench
 # or, for a local parquet copy:
 # pcfbench init my_run --dataset '/data/PCF-Bench-HF/data/full-*.parquet'
 
@@ -200,10 +200,9 @@ PCF-Bench organises the 28 tasks into a four-tier hierarchy: **Perception → Un
 
 ## 🛠 CLI reference
 
-A single command, ten subcommands:
+A single command, nine subcommands:
 
 ```
-pcfbench version                       Print version.
 pcfbench info                          Show provider keys + Python env diagnostic.
 pcfbench fetch --out-dir D             Pre-materialize the dataset (optional;
        (--repo-id REPO  | --shards-glob 'PATH/full-*.parquet')                eval auto-materializes on first run).

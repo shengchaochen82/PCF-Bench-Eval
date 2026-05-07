@@ -13,12 +13,9 @@ configurations.
 """
 from __future__ import annotations
 
-__version__ = "0.1.0"
-
 from pcfbench.config import EvalConfig, load_config
 
 __all__ = [
     "EvalConfig",
     "load_config",
-    "__version__",
 ]
