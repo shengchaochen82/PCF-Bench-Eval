@@ -2,7 +2,7 @@
 
 # PCF-Bench
 
-### Evaluating Vision-Language Models on Photonic Crystal Fiber Inverse Design
+### PCFBench: How Far Can Large Vision-Language Models Go in Physics-aware Photonic Inverse Design?
 
 [![Python](https://img.shields.io/badge/python-%E2%89%A53.9-blue.svg)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](#license)
@@ -10,7 +10,7 @@
 [![Tasks](https://img.shields.io/badge/tasks-28-orange.svg)](#-task-catalogue)
 [![Models](https://img.shields.io/badge/providers-4-lightgrey.svg)](#-supported-providers)
 
-A configuration-driven evaluation harness for **28 vision-language reasoning tasks** spanning geometry perception, physics understanding, multimodal reasoning, inverse design, and code generation, on a domain-specific benchmark of **44,015 photonic-crystal-fibre samples**.
+A configuration-driven evaluation harness for **28 vision-language reasoning tasks** spanning geometry perception, physics understanding, multimodal reasoning, inverse design, and code generation, on a domain-specific benchmark**.
 
 [**Quickstart**](#-quickstart) ·
 [**Tasks**](#-task-catalogue) ·
@@ -22,9 +22,6 @@ A configuration-driven evaluation harness for **28 vision-language reasoning tas
 
 ---
 
-## 📰 Updates
-
-* **2026-05-06** — Public release of PCF-Bench evaluation suite alongside the NeurIPS 2026 D&B-track paper. Single CLI (`pcfbench`), pydantic-validated configs, multi-key round-robin, and 12 MAS baselines bundled.
 
 ## ✨ Highlights
 
