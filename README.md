@@ -370,43 +370,6 @@ PCFBench_Eval/
 └── README.md             ← you are here
 ```
 
----
-
-## ❓ FAQ
-
-<details>
-<summary><b>How long does a full run take?</b></summary>
-
-A 200-sample-per-task pass over all 28 tasks against `openai/gpt-4o-mini` with 16 workers and a single API key takes ≈ 2 hours. Throughput scales near-linearly with key count up to OpenRouter's per-account RPM ceiling; with a multi-key pool we routinely sustain 200+ requests in flight.
-</details>
-
-<details>
-<summary><b>Why are loss-prediction tasks scored with Log-MAE rather than NRMSE?</b></summary>
-
-Loss values span 15 orders of magnitude; NRMSE is dominated by a few high-loss outliers and is unstable to trimming, while Log-MAE remains stable (Kendall τ ≈ 0.97 vs. 0.61 under top-1% trim). Both are reported, with Log-MAE primary.
-</details>
-
-<details>
-<summary><b>Can I evaluate on a smaller, balanced subset?</b></summary>
-
-Yes — point `subset_manifest` at a JSON manifest mapping each task to a list of `sample_ids`. The repo ships a stratified 200-sample subset under `examples/subset_v1.json` (regenerable via the dataset card script).
-</details>
-
-<details>
-<summary><b>How do I rerun a previous experiment exactly?</b></summary>
-
-Each run JSON embeds its full config. `pcfbench eval --config <path>/<run_id>.json` reruns it bit-for-bit (modulo provider non-determinism — set `temperature: 0` for that).
-</details>
-
-<details>
-<summary><b>How do I compare two runs?</b></summary>
-
-```bash
-pcfbench compare results/baseline.json results/improved.json
-```
-
-Prints a per-task, per-metric Δ-table with green/red arrows.
-</details>
 
 ---
 
