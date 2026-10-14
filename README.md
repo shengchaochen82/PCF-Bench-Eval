@@ -9,7 +9,7 @@
 [![NeurIPS 2026](https://img.shields.io/badge/NeurIPS%202026-Evaluations%20%26%20Datasets%20Track-7c3aed.svg)](https://pcfbench.github.io/)
 [![Project Page](https://img.shields.io/badge/Project-Page-1f6feb.svg)](https://pcfbench.github.io/)
 [![Dataset](https://img.shields.io/badge/%F0%9F%A4%97%20Dataset-PCF--Bench-ffcc4d.svg)](https://huggingface.co/datasets/PCF-Bench/PCF-Bench)
-[![Python](https://img.shields.io/badge/python-%E2%89%A53.9-blue.svg)](https://www.python.org/)
+[![Python](https://img.shields.io/badge/python-%E2%89%A53.10-blue.svg)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](#license)
 
 [**Project page**](https://pcfbench.github.io/) ·
@@ -25,7 +25,7 @@
 ## 📰 News
 
 - 🎉 PCFBench has been accepted to the **NeurIPS 2026 Track on Evaluations and Datasets**.
-- 🌐 The [project page](https://pcfbench.github.io/) is live, with the full leaderboard, interactive samples and real design-loop case studies.
+- 🌐 The project page is live at **[pcfbench.github.io](https://pcfbench.github.io/)**, with the full leaderboard, interactive samples and real design-loop case studies.
 - 🤗 The dataset is available on [Hugging Face](https://huggingface.co/datasets/PCF-Bench/PCF-Bench).
 
 ---
@@ -97,7 +97,7 @@ results/
 
 ## 📦 Installation
 
-**Requirements**: Python ≥ 3.9.
+**Requirements**: Python ≥ 3.10.
 
 ```bash
 pip install -e .                 # core

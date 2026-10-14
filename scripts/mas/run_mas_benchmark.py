@@ -5,21 +5,14 @@ Bridges MASLab multi-agent methods with the PCFBench evaluation framework.
 Supports both the native PCFBench pipeline and MASLab-based methods
 (DyLAN, CAMEL, MAV, MacNet, etc.).
 
-Usage:
-    # Native pipeline (cascaded mode)
-    python eval/run_mas_benchmark.py --mode native --pipeline cascaded
+Usage (normally invoked through ``pcfbench mas-eval``):
+    # MASLab method, e.g. DyLAN
+    python scripts/mas/run_mas_benchmark.py --method dylan \\
+        --model openai/gpt-4o-mini --maslab_config openrouter_config.json \\
+        --data_dir results/.cache/<slug> --max_samples 200
 
-    # Native pipeline (oracle mode)
-    python eval/run_mas_benchmark.py --mode native --pipeline oracle
-
-    # MASLab method (e.g., DyLAN applied to PCFBench pipeline)
-    python eval/run_mas_benchmark.py --mode maslab --method pcfbench_pipeline \\
-        --model openai/gpt-4o-mini --maslab_config openrouter_config.json
-
-    # Compare multiple methods
-    python eval/run_mas_benchmark.py --mode compare \\
-        --methods pcfbench_pipeline,dylan,camel \\
-        --model gpt-4o-mini
+    # The native Sequential Pipeline is a registered task instead:
+    #   pcfbench eval with tasks: [mas_pipeline_cascaded, mas_pipeline_oracle]
 """
 
 import argparse

@@ -5,11 +5,15 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "pcfbench"
 version = "0.0.0"
-description = "Evaluation harness for PCF-Bench (Photonic Crystal Fiber Inverse Design)."
+description = "Evaluation suite for PCFBench, a benchmark for vision-language models in photonic crystal fibre inverse design (NeurIPS 2026 Evaluations & Datasets Track)."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
-authors = [{ name = "PCF-Bench authors" }]
+authors = [
+    { name = "Shengchao Chen" },
+    { name = "Ting Shu" },
+    { name = "Sufen Ren" },
+]
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
@@ -28,6 +32,11 @@ dependencies = [
     "datasets>=3.0",
     "Pillow>=10.0",
 ]
+
+[project.urls]
+Homepage = "https://pcfbench.github.io/"
+Repository = "https://github.com/shengchaochen82/PCF-Bench-Eval"
+Dataset = "https://huggingface.co/datasets/PCF-Bench/PCF-Bench"
 
 [project.optional-dependencies]
 mas = [

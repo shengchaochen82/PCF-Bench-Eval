@@ -2,7 +2,7 @@
 """Score a MASLab result JSON against PCFBench inverse-design ground truth.
 
 Usage:
-    python eval/score_maslab_results.py eval/results/MASLab_dylan_gpt-4o-mini_*.json
+    python scripts/mas/score_maslab_results.py results/mas/MASLab_dylan_gpt-4o-mini_*.json
 
 Outputs three metrics to stdout (matching tab_mas_methods columns):
   PSel  — Parameter Selection Accuracy

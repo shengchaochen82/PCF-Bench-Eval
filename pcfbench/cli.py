@@ -289,7 +289,7 @@ EPILOG = textwrap.dedent("""\
       pcfbench init my_run --dataset PCF-Bench/PCF-Bench
       pcfbench validate my_run.yaml
       pcfbench eval --config my_run.yaml
-      pcfbench eval --config my_run.yaml --override-model gpt-4o-mini
+      pcfbench eval --config my_run.yaml --override-model openai/gpt-4o-mini
       pcfbench fetch --shards-glob '/data/shards/full-*.parquet' --out-dir ./PCF-Bench
       pcfbench mas-eval --method dylan --data_dir ./cache --max_samples 100
       pcfbench tasks --filter physics
@@ -469,8 +469,9 @@ def build_parser() -> argparse.ArgumentParser:
                         "agentverse, autogen, evomac, pcfbench_pipeline).")
     p.add_argument("--method_config", default=None,
                    help="Optional method-specific config name.")
-    p.add_argument("--model", default="gpt-4o-mini",
-                   help="VLM backbone (default: gpt-4o-mini).")
+    p.add_argument("--model", default="openai/gpt-4o-mini",
+                   help="VLM backbone, must match a key in --maslab_config "
+                        "(default: openai/gpt-4o-mini).")
     p.add_argument("--maslab_config", default="openrouter_config.json",
                    help="Filename in MAS/model_api_configs/ (copy from the "
                         "*.example.json template and fill in your key).")
