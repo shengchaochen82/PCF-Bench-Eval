@@ -18,6 +18,8 @@
 [**Quickstart**](#-quickstart) ·
 [**Tasks**](#-task-catalogue)
 
+<img src=".github/hero-loop.gif" alt="Four real design loops from the PCFBench case study. For each fibre a VLM perceives the cross-section, proposes one geometric edit, and the edited fibre is re-simulated with FDTD, which shows whether the loss goes up or down." width="760">
+
 </div>
 
 ---
@@ -41,7 +43,6 @@ PCFBench evaluates vision-language models (VLMs) on the complete inverse-design 
 | 🤖 **12 MAS baselines** | Vanilla · CoT · Self-Consistency · LLM-Debate · MAD · CAMEL · AutoGen · AgentVerse · DyLAN · MacNet · EvoMAC · MAV |
 | 🎛 **One config, one CLI** | A single pydantic-validated YAML drives every run, and nine subcommands cover the full life-cycle |
 | 📊 **Standard outputs** | Each run emits `<id>.json`, `<id>.csv` (leaderboard-ready) and `<id>.md` (human summary) |
-| 🧪 **Reproducible** | Pin samples with a stratified-subset manifest, and every output records the full config |
 
 ---
 
