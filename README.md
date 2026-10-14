@@ -1,36 +1,47 @@
 <div align="center">
 
-# PCF-Bench
+<img src=".github/logo.svg" alt="PCFBench logo" width="96">
 
-### PCFBench: How Far Can Large Vision-Language Models Go in Physics-aware Photonic Inverse Design?
+# PCFBench
 
+### How Far Can Large Vision-Language Models Go in Physics-aware Photonic Inverse Design?
+
+[![NeurIPS 2026](https://img.shields.io/badge/NeurIPS%202026-Evaluations%20%26%20Datasets%20Track-7c3aed.svg)](https://pcfbench.github.io/)
+[![Project Page](https://img.shields.io/badge/Project-Page-1f6feb.svg)](https://pcfbench.github.io/)
+[![Dataset](https://img.shields.io/badge/%F0%9F%A4%97%20Dataset-PCF--Bench-ffcc4d.svg)](https://huggingface.co/datasets/PCF-Bench/PCF-Bench)
 [![Python](https://img.shields.io/badge/python-%E2%89%A53.9-blue.svg)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](#license)
-[![Track](https://img.shields.io/badge/NeurIPS%202026-Datasets%20%26%20Benchmarks-purple.svg)](#)
-[![Tasks](https://img.shields.io/badge/tasks-28-orange.svg)](#-task-catalogue)
-[![Models](https://img.shields.io/badge/providers-4-lightgrey.svg)](#-supported-providers)
 
+[**Project page**](https://pcfbench.github.io/) ·
+[**Leaderboard**](https://pcfbench.github.io/#leaderboard) ·
+[**Dataset**](https://huggingface.co/datasets/PCF-Bench/PCF-Bench) ·
 [**Quickstart**](#-quickstart) ·
-[**Tasks**](#-task-catalogue) ·
-[**CLI**](#-cli-reference) ·
-[**Add a model**](#-evaluate-your-own-model) ·
-[**Cite**](#-citation)
+[**Tasks**](#-task-catalogue)
 
 </div>
 
 ---
 
+## 📰 News
+
+- 🎉 PCFBench has been accepted to the **NeurIPS 2026 Track on Evaluations and Datasets**.
+- 🌐 The [project page](https://pcfbench.github.io/) is live, with the full leaderboard, interactive samples and real design-loop case studies.
+- 🤗 The dataset is available on [Hugging Face](https://huggingface.co/datasets/PCF-Bench/PCF-Bench).
+
+---
+
+PCFBench evaluates vision-language models (VLMs) on the complete inverse-design workflow for photonic crystal fibres (PCFs). It spans 26 tasks in six categories of increasing cognitive demand, built from over 220K FDTD simulation samples across 18 fibre families. This repository holds the evaluation suite used in the paper, with the task prompts, output extractors and metrics, a configuration-driven CLI, and the multi-agent baselines.
 
 ## ✨ Highlights
 
 | | |
 | --- | --- |
-| 🧩 **28 tasks, 6 categories** | Geometry · Physics · Text · Multimodal · Inverse Design · Code Generation, plus a 4-stage MAS pipeline |
-| 🔌 **OpenRouter, multi-key pool** | One provider routes to 200+ frontier and open-weight VLMs; round-robin across an arbitrary number of OpenRouter keys |
-| 🤖 **12 MAS baselines** | DyLAN · MacNet · AutoGen · EvoMAC · MAV · AgentVerse · CAMEL · Self-Consistency · CoT · LLM-Debate · MAD · Vanilla |
-| 🎛 **One config, one CLI** | Single pydantic-validated YAML drives every run; eight subcommands cover the full life-cycle |
-| 📊 **Standard outputs** | Each run emits `<id>.json`, `<id>.csv` (leaderboard-ready), and `<id>.md` (human summary) |
-| 🧪 **Reproducible** | Pin samples with a stratified-subset manifest; every output records the full config |
+| 🧩 **26 tasks, 6 categories** | Geometry · Physics · Text · Multimodal · Inverse Design · Code Generation, plus the four-stage Sequential Pipeline in cascaded and oracle modes (28 registered task names) |
+| 🔌 **OpenRouter, multi-key pool** | One OpenAI-compatible provider covers the paper's 41-VLM cohort, with round-robin across any number of OpenRouter keys |
+| 🤖 **12 MAS baselines** | Vanilla · CoT · Self-Consistency · LLM-Debate · MAD · CAMEL · AutoGen · AgentVerse · DyLAN · MacNet · EvoMAC · MAV |
+| 🎛 **One config, one CLI** | A single pydantic-validated YAML drives every run, and nine subcommands cover the full life-cycle |
+| 📊 **Standard outputs** | Each run emits `<id>.json`, `<id>.csv` (leaderboard-ready) and `<id>.md` (human summary) |
+| 🧪 **Reproducible** | Pin samples with a stratified-subset manifest, and every output records the full config |
 
 ---
 
@@ -45,19 +56,18 @@
 7. [Multi-agent (MAS) evaluation](#-multi-agent-mas-evaluation)
 8. [Evaluate your own model](#-evaluate-your-own-model)
 9. [Repository layout](#-repository-layout)
-10. [FAQ](#-faq)
-11. [License](#license)
+10. [License](#license)
 
 ---
 
 ## 🚀 Quickstart
 
 ```bash
-# 1. install (replace <repo-url> with the URL displayed at the top of the page)
-git clone <repo-url> PCF-Bench-Eval && cd PCF-Bench-Eval
+# 1. install
+git clone https://github.com/shengchaochen82/PCF-Bench-Eval.git && cd PCF-Bench-Eval
 pip install -e .
 
-# 2. set provider keys (any number; supports round-robin)
+# 2. set provider keys (any number, used round-robin)
 export OPENROUTER_API_KEY_1=sk-or-...
 export OPENROUTER_API_KEY_2=sk-or-...
 
@@ -68,8 +78,8 @@ pcfbench init my_run --dataset PCF-Bench/PCF-Bench
 
 # 4. run
 pcfbench eval --config my_run.yaml
-#   first run does a one-time materialization into output_dir/.cache/<slug>;
-#   subsequent runs reuse it. Override with cache_dir: in the YAML if needed.
+#   the first run materializes the dataset once into output_dir/.cache/<slug>,
+#   and later runs reuse it. Set cache_dir: in the YAML to move it.
 ```
 
 You'll see live progress per task, then artefacts under `results/`:
@@ -81,7 +91,7 @@ results/
 └── my_run_2026...Z.md      # human-readable summary
 ```
 
-> **Tip.** No install? `./bin/pcfbench …` works straight from the checkout — same CLI, just runs the local source.
+> **Tip.** No install? `./bin/pcfbench …` works straight from the checkout. It is the same CLI, run from the local source.
 
 ---
 
@@ -112,10 +122,10 @@ pcfbench tasks    # lists all 28 registered tasks
 
 ## 🧩 Task catalogue
 
-PCF-Bench organises the 28 tasks into a four-tier hierarchy: **Perception → Understanding → Reasoning → Design**. Each task ships an instruction prompt, an output extractor, and a primary metric. Use `pcfbench tasks` to print the live registry; the table below summarises by category.
+PCFBench organises its 26 tasks into six categories of increasing cognitive demand, and the multi-agent track adds two registered pipeline tasks (27 and 28). Each task ships an instruction prompt, an output extractor and a primary metric. Run `pcfbench tasks` to print the live registry. The tables below summarise it by category.
 
 <details>
-<summary><b>Geometry Perception</b> — 5 tasks</summary>
+<summary><b>Geometry Perception</b> (5 tasks)</summary>
 
 | # | Task name | Image | Primary metric |
 |---|---|---|---|
@@ -127,7 +137,7 @@ PCF-Bench organises the 28 tasks into a four-tier hierarchy: **Perception → Un
 </details>
 
 <details>
-<summary><b>Physics Understanding</b> — 5 tasks</summary>
+<summary><b>Physics Understanding</b> (5 tasks)</summary>
 
 | # | Task name | Image | Primary metric |
 |---|---|---|---|
@@ -139,7 +149,7 @@ PCF-Bench organises the 28 tasks into a four-tier hierarchy: **Perception → Un
 </details>
 
 <details>
-<summary><b>Text Generation</b> — 3 tasks</summary>
+<summary><b>Text Generation</b> (3 tasks)</summary>
 
 | # | Task name | Image | Primary metric |
 |---|---|---|---|
@@ -149,7 +159,7 @@ PCF-Bench organises the 28 tasks into a four-tier hierarchy: **Perception → Un
 </details>
 
 <details>
-<summary><b>Multimodal Reasoning</b> — 6 tasks</summary>
+<summary><b>Multimodal Reasoning</b> (6 tasks)</summary>
 
 | # | Task name | Image | Primary metric |
 |---|---|---|---|
@@ -162,7 +172,7 @@ PCF-Bench organises the 28 tasks into a four-tier hierarchy: **Perception → Un
 </details>
 
 <details>
-<summary><b>Inverse Design</b> — 4 tasks</summary>
+<summary><b>Inverse Design</b> (4 tasks)</summary>
 
 | # | Task name | Image | Primary metric |
 |---|---|---|---|
@@ -173,7 +183,7 @@ PCF-Bench organises the 28 tasks into a four-tier hierarchy: **Perception → Un
 </details>
 
 <details>
-<summary><b>Code Generation</b> — 3 tasks</summary>
+<summary><b>Code Generation</b> (3 tasks)</summary>
 
 | # | Task name | Image | Primary metric |
 |---|---|---|---|
@@ -183,7 +193,7 @@ PCF-Bench organises the 28 tasks into a four-tier hierarchy: **Perception → Un
 </details>
 
 <details>
-<summary><b>Multi-Agent Pipeline</b> — 2 tasks</summary>
+<summary><b>Multi-Agent Pipeline</b> (2 registered tasks)</summary>
 
 | # | Task name | Image | Primary metric |
 |---|---|---|---|
@@ -195,30 +205,31 @@ PCF-Bench organises the 28 tasks into a four-tier hierarchy: **Perception → Un
 
 ## 🛠 CLI reference
 
-A single command, nine subcommands:
+A single command with nine subcommands:
 
 ```
-pcfbench info                          Show provider keys + Python env diagnostic.
-pcfbench fetch --out-dir D             Pre-materialize the dataset (optional;
-       (--repo-id REPO  | --shards-glob 'PATH/full-*.parquet')                eval auto-materializes on first run).
+pcfbench info                              Show provider keys + Python env diagnostic.
+pcfbench fetch --out-dir D                 Pre-materialize the dataset (optional,
+       (--repo-id REPO | --shards-glob G)    eval materializes it on first run).
        [--max-samples N] [--streaming]
-pcfbench tasks [--filter STR]          List the 28 registered tasks.
-pcfbench init   NAME                   Scaffold a YAML config from a template.
+pcfbench tasks [--filter STR]              List the 28 registered tasks
+                                           (filters on task name or category).
+pcfbench init NAME                         Scaffold a YAML config from a template.
        [--template TPL] [--path P] [--dataset SRC] [--force]
-pcfbench validate CONFIG               Type-check a config.
-pcfbench eval --config CONFIG          Run a configured evaluation.
-       [--override-model M]              swap cfg.model for sweeps
-       [--override-dataset SRC]          swap cfg.dataset (HF repo or parquet glob)
+pcfbench validate CONFIG                   Type-check a config.
+pcfbench eval --config CONFIG              Run a configured evaluation.
+       [--override-model M]                  swap cfg.model for sweeps
+       [--override-dataset SRC]              swap cfg.dataset (HF repo or parquet glob)
        [--override-max-samples N]
-       [--dry-run]                       same as `validate`
+       [--dry-run]                           same as `validate`
 pcfbench score RUN.json [--output-dir D]   Re-render JSON → CSV + Markdown.
-pcfbench compare LEFT.json RIGHT.json   Print a Δ-table between two runs.
-pcfbench mas-eval --method M --data_dir D     Run a MASLab multi-agent baseline
-       --model M [--method_config NAME]          (DyLAN, MacNet, AutoGen, EvoMAC,
-       [--maslab_config FILE.json]               CAMEL, MAV, AgentVerse, MAD,
-       [--max_samples N] [--num_workers W]       LLM-Debate, Self-Consistency,
-       [--no-score] [--output_dir D]             CoT, Vanilla) on PCFBench data
-                                                 and score it.
+pcfbench compare LEFT.json RIGHT.json      Print a Δ-table between two runs.
+pcfbench mas-eval --method M --data_dir D  Run a MASLab multi-agent baseline
+       --model M [--method_config NAME]      (DyLAN, MacNet, AutoGen, EvoMAC,
+       [--maslab_config FILE.json]           CAMEL, MAV, AgentVerse, MAD,
+       [--subset_manifest FILE.json]         LLM-Debate, Self-Consistency,
+       [--max_samples N] [--num_workers W]   CoT, Vanilla) on PCFBench data
+       [--no-score] [--output_dir D]         and score it.
 ```
 
 **Examples**:
@@ -226,7 +237,7 @@ pcfbench mas-eval --method M --data_dir D     Run a MASLab multi-agent baseline
 ```bash
 pcfbench tasks --filter physics              # list physics-understanding tasks
 pcfbench eval --config my.yaml \
-              --override-model gpt-4o \
+              --override-model openai/gpt-4o \
               --override-max-samples 100     # quick smoke test
 pcfbench compare results/baseline.json results/improved.json
 ```
@@ -235,12 +246,12 @@ pcfbench compare results/baseline.json results/improved.json
 
 ## 🎛 Configuration
 
-The full schema lives in `pcfbench/config.py`. Unknown fields raise `ValidationError` immediately so typos are caught before any model call.
+The full schema lives in `pcfbench/config.py`. Unknown fields raise `ValidationError` immediately, so typos are caught before any model call.
 
 ```yaml
 run_name: my_run
 
-# Parquet input — HuggingFace repo id, or a local glob over parquet shards.
+# Parquet input: a HuggingFace repo id, or a local glob over parquet shards.
 dataset: PCF-Bench/PCF-Bench
 # dataset: /data/PCF-Bench-HF/data/full-*.parquet
 
@@ -256,13 +267,13 @@ provider:
 
 model: openai/gpt-4o-mini    # any OpenRouter model id
 
-api_keys_env:                # round-robin pool; up to 100 keys
+api_keys_env:                # round-robin pool, up to 100 keys
   - OPENROUTER_API_KEY_1
   - OPENROUTER_API_KEY_2
 
 tasks: all                   # or a list, e.g. [family_classification, loss_prediction_1550]
 max_samples: 200
-# subset_manifest: examples/subset_v1.json  # optional stratified subset
+# subset_manifest: path/to/subset.json   # optional stratified subset
 
 runner:
   num_workers: 16
@@ -280,28 +291,28 @@ Three ready-to-use templates ship in `examples/`:
 | Template | Purpose |
 | --- | --- |
 | `examples/single_model.yaml` | one model on all tasks (default) |
-| `examples/multi_model.yaml`  | sweep skeleton — pair with `--override-model` |
+| `examples/multi_model.yaml`  | sweep skeleton, pair with `--override-model` |
 | `examples/mas.yaml`          | sequential MAS pipeline or MASLab-bridged method |
 
 ---
 
 ## 🔌 Supported provider
 
-The public release routes every model through **OpenRouter** so that the same 41-VLM cohort can be evaluated under one OpenAI-compatible API without per-vendor SDK plumbing. Supply one or more `OPENROUTER_API_KEY_*` environment variables and the round-robin pool will use them all.
+The public release routes every model through **OpenRouter**, so the same 41-VLM cohort can be evaluated under one OpenAI-compatible API without per-vendor SDK plumbing. Supply one or more `OPENROUTER_API_KEY_*` environment variables and the round-robin pool will use them all.
 
 | Provider | env-var pattern | base URL |
 | --- | --- | --- |
 | `openrouter` | `OPENROUTER_API_KEY_*` | `https://openrouter.ai/api/v1` |
 
-Set `model:` in your config to any OpenRouter id (`openai/gpt-4o-mini`, `anthropic/claude-sonnet-4-5`, `google/gemini-2.0-flash`, `qwen/qwen-vl-max`, ...). The client implementation is `OpenRouterClient` in `tools/llm_client.py`; subclass `BaseLLMClient` if you need a private endpoint.
+Set `model:` in your config to any OpenRouter id (`openai/gpt-4o-mini`, `anthropic/claude-sonnet-4.5`, `google/gemini-2.5-pro`, `qwen/qwen2.5-vl-72b-instruct`, ...). The client is `OpenRouterClient` in `tools/llm_client.py`.
 
 ---
 
 ## 🤖 Multi-agent (MAS) evaluation
 
-`MAS/` ships the 12-baseline MASLab cohort plus the native PCFBench pipeline. Two complementary entry points:
+Two complementary entry points cover the 13 multi-agent methods in the paper.
 
-**(a) Native sequential pipeline** — Perception → Understanding → Reasoning → Design, implemented as the registered tasks `mas_pipeline_cascaded` and `mas_pipeline_oracle` (run via the standard `pcfbench eval`):
+**(a) Native Sequential Pipeline.** Four stages (Perception → Understanding → Reasoning → Design), registered as the tasks `mas_pipeline_cascaded` and `mas_pipeline_oracle` and run with the standard `pcfbench eval`. In cascaded mode each stage receives the parsed outputs of the previous stages, and in oracle mode it receives the ground-truth values instead.
 
 ```bash
 pcfbench init mas_native --dataset PCF-Bench/PCF-Bench
@@ -309,47 +320,53 @@ pcfbench init mas_native --dataset PCF-Bench/PCF-Bench
 pcfbench eval --config mas_native.yaml
 ```
 
-**(b) MASLab baselines** — DyLAN, MacNet, AutoGen, EvoMAC, MAV, AgentVerse, CAMEL, Self-Consistency, CoT, LLM-Debate, MAD, Vanilla. Each consumes the same enriched query format and is scored on the same PSel / Direction / Closed-Loop rubric:
+**(b) MASLab baselines.** DyLAN, MacNet, AutoGen, EvoMAC, MAV, AgentVerse, CAMEL, Self-Consistency, CoT, LLM-Debate, MAD and Vanilla, bundled under `MAS/`. Each consumes the same enriched query and is scored on the same PSel / Direction / Closed-Loop rubric. These baselines read their endpoints from a MASLab model config, so copy the example once and fill in your OpenRouter key:
 
 ```bash
+cp MAS/model_api_configs/openrouter_config.example.json \
+   MAS/model_api_configs/openrouter_config.json      # git-ignored
+
 pcfbench mas-eval --method dylan \
-    --model gpt-4o-mini \
+    --model openai/gpt-4o-mini \
     --data_dir results/.cache/<your-slug> \
     --max_samples 200
 ```
 
-The wrapper invokes `scripts/mas/run_mas_benchmark.py` (per-sample inference) followed by `scripts/mas/score_maslab_results.py` (PSel + Direction + CL accuracy) and writes a `*_scored.json` next to the raw output. Method classes live in `MAS/methods/<method>/` following the upstream MASLab layout. Human Score (HS) is a separate expert-rated metric (Appendix~\ref{app:human_eval} in the paper) and is not computed by this script.
+`--model` must match a key in that config file exactly (for example `openai/gpt-4o-mini`, not `gpt-4o-mini`). The wrapper invokes `scripts/mas/run_mas_benchmark.py` (per-sample inference) followed by `scripts/mas/score_maslab_results.py` (PSel + Direction + CL accuracy) and writes a `*_scored.json` next to the raw output. Method classes live in `MAS/methods/<method>/`, following the upstream [MASLab](https://github.com/MASWorks/MASLab) layout. The Human Score (HS) in the paper's multi-agent table is an expert rating described in the paper's appendix, and this script does not compute it.
 
 ---
 
 ## 🚢 Evaluate your own model
 
-If your model already speaks an OpenAI-compatible chat-completion API (with vision support for image-conditioned tasks), point pcfbench at it:
+If your model is on OpenRouter, pass its id:
 
 ```bash
-# Option A: behind one of the four built-in providers
 export OPENROUTER_API_KEY_1=sk-or-...
-pcfbench eval --config my.yaml --override-model openai/your-model-id
+pcfbench eval --config my.yaml --override-model vendor/your-model-id
+```
 
-# Option B: self-hosted endpoint
-# in your config:
+If it runs behind your own OpenAI-compatible endpoint (vLLM, SGLang, ...) with vision support for the image-conditioned tasks, point `base_url` at it:
+
+```yaml
 provider:
   name: openrouter
   base_url: http://localhost:8000/v1
 model: your-local-model
+api_keys_env: [LOCAL_API_KEY]   # export LOCAL_API_KEY=dummy if your server ignores keys
 ```
 
-For models with non-OpenAI APIs, subclass `BaseLLMClient` in `tools/llm_client.py`, register it under a new provider name, and update `EvalConfig.provider.name` to accept it. About 50 LOC.
+For models with non-OpenAI APIs, subclass `BaseLLMClient` in `tools/llm_client.py`, return it from `get_llm_client` under a new provider name, and add that name to `PROVIDERS` in `pcfbench/config.py`. This takes about 50 lines of code.
 
 ---
 
 ## 📂 Repository layout
 
 ```
-PCFBench_Eval/
+PCF-Bench-Eval/
 ├── pcfbench/             ← public package: CLI + runner + config + reporting
-│   ├── cli.py            8 subcommands
+│   ├── cli.py            9 subcommands
 │   ├── config.py         pydantic v2 schema
+│   ├── fetch.py          HF repo / parquet shards → per-sample directories
 │   ├── providers.py      multi-key round-robin client
 │   ├── runner.py         orchestrator over eval/tasks/*
 │   └── reporting.py      JSON / CSV leaderboard / Markdown
@@ -357,10 +374,11 @@ PCFBench_Eval/
 │   ├── tasks/            21 task classes, 28 registered task names
 │   └── metrics/          classification / regression / generation / code
 ├── tools/                ← minimal supporting modules
-│   ├── llm_client.py     4-provider OpenAI-compatible base
+│   ├── llm_client.py     OpenAI-compatible client (OpenRouter)
 │   ├── env_utils.py      API-key / worker / RPM discovery
 │   └── io_utils.py       atomic-write JSON
-├── MAS/                  ← bundled multi-agent baselines
+├── MAS/                  ← bundled MASLab baselines and model configs
+├── scripts/mas/          ← inference + scoring behind `pcfbench mas-eval`
 ├── bin/pcfbench          ← zero-install launcher
 ├── examples/             ← 3 starter configs
 ├── pyproject.toml
@@ -368,15 +386,14 @@ PCFBench_Eval/
 └── README.md             ← you are here
 ```
 
-
 ---
 
 ## License
 
-The evaluation suite is released under the MIT License. The PCF-Bench dataset is released separately under its own license; see the dataset repository for details.
+The evaluation suite is released under the [MIT License](LICENSE). The PCFBench dataset is distributed separately on [Hugging Face](https://huggingface.co/datasets/PCF-Bench/PCF-Bench) under CC BY 4.0.
 
 ---
 
 <div align="center">
-<sub>Built for NeurIPS 2026 D&B-track. Issues, discussions, and pull requests welcome.</sub>
+<sub>NeurIPS 2026 · Track on Evaluations and Datasets. Issues, discussions and pull requests are welcome.</sub>
 </div>
