@@ -131,15 +131,15 @@ def materialize(
     t0 = time.time()
     ds = _iter_dataset(repo_id, shards_glob, streaming)
 
-    if hasattr(ds, "__len__"):
-        total = len(ds) if max_samples is None else min(max_samples, len(ds))
-    else:
-        total = max_samples  # may be None for full streaming
+    total = max_samples  # rows outside the evaluation subset are skipped
 
     written = 0
     for row in ds:
         if max_samples is not None and written >= max_samples:
             break
+        # The evaluation tasks run on the evaluation subset (``in_benchmark``).
+        if not row.get("in_benchmark", True):
+            continue
         _write_sample(row, out_dir)
         written += 1
         if written % progress_every == 0 or written == total:
